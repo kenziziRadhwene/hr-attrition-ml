@@ -9,82 +9,62 @@ import os
 SAVE_DIR = "saved_model"
 
 # ─────────────────────────────────────────
-# Mapping Départements Ooredoo → IBM HR
+# Mapping Départements Ooredoo Tunisie → Labels dataset
+# (les labels sont identiques car le dataset est déjà en noms Ooredoo)
 # ─────────────────────────────────────────
 DEPARTMENT_MAPPING = {
-    # → Sales
-    "DIRECTION_COMMERCIALE"             : "Sales",
-    "SERVICE_APPLICATION_VENTE"         : "Sales",
-    "DIRECTION_SERVICE_CLIENT"          : "Sales",
-
-    # → Research & Development
-    "DIRECTION_TECHNOLOGIQUE"           : "Research & Development",
-    "DIRECTION_SYSTEMES_INFORMATION"    : "Research & Development",
-    "DIRECTION_OPERATIONS"              : "Research & Development",
-    "DIRECTION_TECHNIQUE_FIXE"          : "Research & Development",
-    "DIRECTION_INGENIERIE_RESEAUX"      : "Research & Development",
-    "DEPARTEMENT_PERFORMANCE_RESEAUX"   : "Research & Development",
-    "SERVICE_DATA_ENGINEERING"          : "Research & Development",
-    "SERVICE_DASHBOARD_DATA_MINING"     : "Research & Development",
-
-    # → Human Resources
-    "DIRECTION_RESSOURCES_HUMAINES"          : "Human Resources",
-    "DIRECTION_GENERALE"                     : "Human Resources",
-    "DIRECTION_ADMINISTRATIVE_FINANCIERE"    : "Human Resources",
-    "DIRECTION_JURIDIQUE"                    : "Human Resources",
-    "DIRECTION_RELATIONS_OPERATEURS"         : "Human Resources",
+    "DIRECTION_GENERALE"                    : "DIRECTION_GENERALE",
+    "DIRECTION_RESSOURCES_HUMAINES"         : "DIRECTION_RESSOURCES_HUMAINES",
+    "DIRECTION_ADMINISTRATIVE_FINANCIERE"   : "DIRECTION_ADMINISTRATIVE_FINANCIERE",
+    "DIRECTION_JURIDIQUE"                   : "DIRECTION_JURIDIQUE",
+    "DIRECTION_TECHNOLOGIQUE"               : "DIRECTION_TECHNOLOGIQUE",
+    "DIRECTION_RELATIONS_OPERATEURS"        : "DIRECTION_RELATIONS_OPERATEURS",
+    "DIRECTION_SERVICE_CLIENT"              : "DIRECTION_SERVICE_CLIENT",
 }
 
 # ─────────────────────────────────────────
-# Mapping JobRole Ooredoo → IBM HR
+# Mapping JobRole Ooredoo → Labels dataset
 # ─────────────────────────────────────────
 JOBROLE_MAPPING = {
-    # → Sales
-    "COMMERCIAL"                : "Sales Executive",
-    "RESPONSABLE_COMMERCIAL"    : "Sales Executive",
-    "DIRECTEUR_COMMERCIAL"      : "Sales Executive",
-    "CHARGE_MARKETING"          : "Sales Executive",
-    "CONSEILLER_CLIENT"         : "Sales Representative",
-    "SUPERVISEUR_CENTRE_APPEL"  : "Sales Representative",
-    "DIRECTEUR_SERVICE_CLIENT"  : "Manager",
-    "RESPONSABLE_SERVICE_CLIENT": "Sales Executive",
-
-    # → Research & Development
-    "DATA_ENGINEER"             : "Research Scientist",
-    "DATA_ANALYST"              : "Research Scientist",
-    "DEVELOPPEUR"               : "Laboratory Technician",
-    "ANALYSTE_SYSTEME"          : "Research Scientist",
-    "ADMINISTRATEUR_SYSTEME"    : "Laboratory Technician",
-    "INGENIEUR_RESEAU"          : "Research Scientist",
-    "INGENIEUR_TELECOM"         : "Research Scientist",
-    "TECHNICIEN_RESEAU"         : "Laboratory Technician",
-    "ARCHITECTE_SYSTEME"        : "Research Director",
-    "DIRECTEUR_TECHNIQUE"       : "Research Director",
-    "DIRECTEUR_SI"              : "Research Director",
-
-    # → Human Resources / Management
-    "RESPONSABLE_RH"            : "Human Resources",
-    "CHARGE_RECRUTEMENT"        : "Human Resources",
-    "CHARGE_FORMATION"          : "Human Resources",
-    "DIRECTEUR_RH"              : "Manager",
-    "DIRECTEUR_GENERAL"         : "Manager",
-    "DIRECTEUR_FINANCIER"       : "Manager",
-    "COMPTABLE"                 : "Human Resources",
-    "CONTROLEUR_GESTION"        : "Human Resources",
-    "DIRECTEUR_JURIDIQUE"       : "Manager",
-    "JURISTE"                   : "Human Resources",
-    "CONSEILLER_JURIDIQUE"      : "Human Resources",
-    "ASSISTANT_DIRECTION"       : "Human Resources",
+    "DIRECTEUR_GENERAL"         : "DIRECTEUR_GENERAL",
+    "ASSISTANT_DIRECTION"       : "ASSISTANT_DIRECTION",
+    "RESPONSABLE_RH"            : "RESPONSABLE_RH",
+    "CHARGE_RECRUTEMENT"        : "CHARGE_RECRUTEMENT",
+    "CHARGE_FORMATION"          : "CHARGE_FORMATION",
+    "DIRECTEUR_FINANCIER"       : "DIRECTEUR_FINANCIER",
+    "COMPTABLE"                 : "COMPTABLE",
+    "CONTROLEUR_GESTION"        : "CONTROLEUR_GESTION",
+    "DIRECTEUR_JURIDIQUE"       : "DIRECTEUR_JURIDIQUE",
+    "JURISTE"                   : "JURISTE",
+    "CONSEILLER_JURIDIQUE"      : "CONSEILLER_JURIDIQUE",
+    "DIRECTEUR_TECHNIQUE"       : "DIRECTEUR_TECHNIQUE",
+    "ARCHITECTE_SYSTEME"        : "ARCHITECTE_SYSTEME",
+    "INGENIEUR_RESEAU"          : "INGENIEUR_RESEAU",
+    "INGENIEUR_TELECOM"         : "INGENIEUR_TELECOM",
+    "TECHNICIEN_RESEAU"         : "TECHNICIEN_RESEAU",
+    "DIRECTEUR_SI"              : "DIRECTEUR_SI",
+    "DEVELOPPEUR"               : "DEVELOPPEUR",
+    "ANALYSTE_SYSTEME"          : "ANALYSTE_SYSTEME",
+    "ADMINISTRATEUR_SYSTEME"    : "ADMINISTRATEUR_SYSTEME",
+    "DATA_ENGINEER"             : "DATA_ENGINEER",
+    "DATA_ANALYST"              : "DATA_ANALYST",
+    "DIRECTEUR_COMMERCIAL"      : "DIRECTEUR_COMMERCIAL",
+    "RESPONSABLE_COMMERCIAL"    : "RESPONSABLE_COMMERCIAL",
+    "COMMERCIAL"                : "COMMERCIAL",
+    "CHARGE_MARKETING"          : "CHARGE_MARKETING",
+    "DIRECTEUR_SERVICE_CLIENT"  : "DIRECTEUR_SERVICE_CLIENT",
+    "RESPONSABLE_SERVICE_CLIENT": "RESPONSABLE_SERVICE_CLIENT",
+    "CONSEILLER_CLIENT"         : "CONSEILLER_CLIENT",
+    "SUPERVISEUR_CENTRE_APPEL"  : "SUPERVISEUR_CENTRE_APPEL",
 }
 
 # ─────────────────────────────────────────
-# Mapping BusinessTravel Ooredoo → IBM HR
+# Mapping BusinessTravel
 # ─────────────────────────────────────────
 BUSINESS_TRAVEL_MAPPING = {
-    "JAMAIS"        : "Non-Travel",
-    "RAREMENT"      : "Travel_Rarely",
-    "FREQUEMMENT"   : "Travel_Frequently",
-    # Valeurs IBM directes (déjà compatibles)
+    "JAMAIS"            : "Non-Travel",
+    "RAREMENT"          : "Travel_Rarely",
+    "FREQUEMMENT"       : "Travel_Frequently",
     "Non-Travel"        : "Non-Travel",
     "Travel_Rarely"     : "Travel_Rarely",
     "Travel_Frequently" : "Travel_Frequently",
@@ -94,58 +74,48 @@ BUSINESS_TRAVEL_MAPPING = {
 class AttritionPredictor:
     """
     Classe principale de prédiction du risque d'attrition
-    Charge le modèle XGBoost + SHAP et effectue les prédictions
-    Gère le mapping des données Ooredoo vers le format IBM HR
+    Modèle XGBoost entraîné sur données Ooredoo Tunisie
+    Salaires en TND, départements et postes Ooredoo réels
+    Version : 3.0-ooredoo-tunisie
     """
 
     def __init__(self):
-        print("🔄 Chargement du modèle et des artefacts...")
-        self.model           = joblib.load(f"{SAVE_DIR}/attrition_model.pkl")
-        self.explainer       = joblib.load(f"{SAVE_DIR}/shap_explainer.pkl")
-        self.feature_names   = joblib.load(f"{SAVE_DIR}/feature_names.pkl")
-        self.label_encoders  = joblib.load(f"{SAVE_DIR}/label_encoders.pkl")
-        self.threshold       = joblib.load(f"{SAVE_DIR}/optimal_threshold.pkl")
-        self.config          = joblib.load(f"{SAVE_DIR}/config.pkl")
-        self.metrics         = joblib.load(f"{SAVE_DIR}/metrics.pkl")
+        print("🔄 Chargement du modèle Ooredoo Tunisie...")
+        self.model          = joblib.load(f"{SAVE_DIR}/attrition_model.pkl")
+        self.explainer      = joblib.load(f"{SAVE_DIR}/shap_explainer.pkl")
+        self.feature_names  = joblib.load(f"{SAVE_DIR}/feature_names.pkl")
+        self.label_encoders = joblib.load(f"{SAVE_DIR}/label_encoders.pkl")
+        self.threshold      = joblib.load(f"{SAVE_DIR}/optimal_threshold.pkl")
+        self.config         = joblib.load(f"{SAVE_DIR}/config.pkl")
+        self.metrics        = joblib.load(f"{SAVE_DIR}/metrics.pkl")
         print("✅ Modèle chargé avec succès !")
         print(f"   Version    : {self.config['version']}")
         print(f"   Seuil      : {self.threshold:.2f}")
         print(f"   Accuracy   : {self.metrics['accuracy']:.2%}")
 
     def _apply_ooredoo_mapping(self, employee_data: dict) -> dict:
-        """
-        Traduit les valeurs Ooredoo vers les valeurs IBM HR
-        attendues par le modèle XGBoost
-        """
-        # Mapping Department
+        """Traduit les valeurs Ooredoo vers les labels du dataset d'entraînement"""
+
         dept = employee_data.get('Department', '')
         if dept in DEPARTMENT_MAPPING:
             employee_data['Department'] = DEPARTMENT_MAPPING[dept]
-            print(f"   🔄 Department : {dept} → {employee_data['Department']}")
 
-        # Mapping JobRole
         role = employee_data.get('JobRole', '')
         if role in JOBROLE_MAPPING:
             employee_data['JobRole'] = JOBROLE_MAPPING[role]
-            print(f"   🔄 JobRole    : {role} → {employee_data['JobRole']}")
 
-        # Mapping BusinessTravel
         travel = employee_data.get('BusinessTravel', '')
         if travel in BUSINESS_TRAVEL_MAPPING:
             employee_data['BusinessTravel'] = BUSINESS_TRAVEL_MAPPING[travel]
-            print(f"   🔄 Travel     : {travel} → {employee_data['BusinessTravel']}")
 
         return employee_data
 
     def _preprocess_input(self, employee_data: dict) -> pd.DataFrame:
         """Prétraite les données d'entrée"""
 
-        # ✅ Appliquer le mapping Ooredoo → IBM HR
         employee_data = self._apply_ooredoo_mapping(employee_data)
-
         df = pd.DataFrame([employee_data])
 
-        # Encodage des variables catégorielles
         categorical_cols = ['Gender', 'MaritalStatus', 'Department',
                             'JobRole', 'BusinessTravel', 'EducationField',
                             'OverTime']
@@ -156,7 +126,6 @@ class AttritionPredictor:
                 try:
                     df[col] = le.transform(df[col])
                 except ValueError:
-                    # Valeur inconnue → valeur par défaut 0
                     print(f"   ⚠️  Valeur inconnue pour {col} : {df[col].values[0]} → 0")
                     df[col] = 0
 
@@ -185,7 +154,6 @@ class AttritionPredictor:
 
         df['work_life_balance_score'] = df['WorkLifeBalance'] * df['satisfaction_score']
 
-        # Aligner les colonnes avec les features du modèle
         for col in self.feature_names:
             if col not in df.columns:
                 df[col] = 0
@@ -196,7 +164,6 @@ class AttritionPredictor:
         return df
 
     def _get_risk_level(self, probability: float) -> str:
-        """Détermine le niveau de risque"""
         if probability >= self.threshold:
             if probability >= 0.85:
                 return "ÉLEVÉ"
@@ -205,36 +172,22 @@ class AttritionPredictor:
         return "FAIBLE"
 
     def _get_shap_factors(self, df: pd.DataFrame) -> list:
-        """Calcule les facteurs SHAP pour un employé"""
         shap_values = self.explainer.shap_values(df)
-
         factors = []
         for i, feature in enumerate(self.feature_names):
             shap_val = float(shap_values[0][i])
             factors.append({
-                'feature': feature,
+                'feature'   : feature,
                 'shap_value': round(shap_val, 4),
-                'impact': 'AUGMENTE' if shap_val > 0 else 'DIMINUE'
+                'impact'    : 'AUGMENTE' if shap_val > 0 else 'DIMINUE'
             })
-
-        # Trier par valeur absolue décroissante
-        factors = sorted(factors,
-                         key=lambda x: abs(x['shap_value']),
-                         reverse=True)
+        factors = sorted(factors, key=lambda x: abs(x['shap_value']), reverse=True)
         return factors[:10]
 
     def _get_recommendations(self, shap_factors: list, probability: float) -> list:
-        """
-        Génère des recommandations basées sur les facteurs SHAP
-        Uniquement si le risque est MOYEN ou ÉLEVÉ
-        """
-        recommendations = []
-
-        # Pas de recommandations si risque faible
         if probability < self.threshold:
             return ["✅ Employé stable — Suivi standard recommandé"]
 
-        # Mapping facteurs → recommandations
         rules = {
             'StockOptionLevel'          : "💰 Proposer des options d'actions ou avantages financiers",
             'overtime_x_joblevel'       : "⏰ Réduire les heures supplémentaires et réévaluer la charge de travail",
@@ -258,6 +211,7 @@ class AttritionPredictor:
             'tenure_category'           : "📅 Adapter le suivi selon l'ancienneté de l'employé",
         }
 
+        recommendations = []
         for factor in shap_factors[:5]:
             if factor['impact'] == 'AUGMENTE':
                 feature = factor['feature']
@@ -270,28 +224,14 @@ class AttritionPredictor:
         return recommendations
 
     def predict(self, employee_data: dict) -> dict:
-        """
-        Prédit le risque d'attrition pour un employé
-        Gère automatiquement le mapping Ooredoo → IBM HR
-        """
         print(f"\n🔍 Prédiction en cours...")
-
-        # Preprocessing + mapping
         df = self._preprocess_input(employee_data)
-
-        # Prédiction
         probability = float(self.model.predict_proba(df)[0][1])
         risk_level  = self._get_risk_level(probability)
-
-        # SHAP
         shap_factors = self._get_shap_factors(df)
-
-        # Recommandations (uniquement si risque MOYEN ou ÉLEVÉ)
         recommendations = self._get_recommendations(shap_factors, probability)
-
-        print(f"   ✅ Probabilité  : {probability:.2%}")
+        print(f"   ✅ Probabilité   : {probability:.2%}")
         print(f"   ✅ Niveau risque : {risk_level}")
-
         return {
             'probability'           : round(probability, 4),
             'risk_level'            : risk_level,
@@ -301,7 +241,6 @@ class AttritionPredictor:
         }
 
     def get_health(self) -> dict:
-        """Retourne l'état de santé du modèle"""
         return {
             'status'        : 'OK',
             'model_version' : self.config['version'],
@@ -313,5 +252,6 @@ class AttritionPredictor:
         }
 
 
-# Instance globale du predictor
+# Instance globale
 predictor = AttritionPredictor()
+
